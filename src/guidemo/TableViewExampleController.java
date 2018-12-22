@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -111,7 +112,28 @@ public class TableViewExampleController implements Initializable {
         firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         
-    }    
+        //Allows user to select multiple rows at a time
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }   
+    
+    /**
+     * this method will remove selected row(s) from the table
+     */
+    public void deleteButtonPushed(){
+        ObservableList<Person> selectedRows, allPeople;
+        allPeople = tableView.getItems();
+        
+        //gets the rows that were selected
+        selectedRows = tableView.getSelectionModel().getSelectedItems();
+        
+        //loop over the List and remove any from selectedrows
+        
+      
+            
+         allPeople.removeAll(selectedRows);
+        
+        
+    }
     
     /**
      *  this method returns ObservableList of People objects
