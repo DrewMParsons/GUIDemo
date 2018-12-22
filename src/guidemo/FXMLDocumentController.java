@@ -1,11 +1,17 @@
 
 package guidemo;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -15,6 +21,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -139,6 +146,26 @@ public class FXMLDocumentController implements Initializable {
         
         this.golfTextArea.setText(textAreaString);
             
+    }
+    /**
+     * 
+     * When this method is called, the scene will change to tableView example 
+     */
+    
+    public void changeScreenButtonPushed(ActionEvent event) throws IOException{
+        
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("TableViewExample.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent); 
+        
+        //This line gets the Stage information
+        //In Start, the stage is passed through as a param.  here we need to get it
+        //the action event(event) doesnt know what type of object is returned, so we tell it the return is of type node
+        //BCS its a Node, we cam then get the scene and window, 
+        //Then cast that as a Stage, and assign to our Stage(window)
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
     }
       /**
      * Initializes the controller class.
