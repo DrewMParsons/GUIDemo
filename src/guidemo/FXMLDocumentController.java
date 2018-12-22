@@ -3,13 +3,17 @@ package guidemo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 
 /**
@@ -62,6 +66,14 @@ public class FXMLDocumentController implements Initializable {
      * This will update Label for Choicebox
      */
     
+    //items for listview
+    @FXML
+    private ListView listView;
+    
+    @FXML
+    private TextArea golfTextArea;
+    
+    
     public void choiceBoxButtonPushed(){
         choiceBoxLabel.setText("My Favorite fruit is:\n " +choiceBox.getValue().toString());
     }
@@ -91,9 +103,7 @@ public class FXMLDocumentController implements Initializable {
     /**
      * This will update comboboxlabel when combobox is changed
      */
-    /**
-     * Initializes the controller class.
-     */
+  
     
     public void comboBoxWasUpdated(){
         this.comboBoxLabel.setText("Course selected:  \n" + comboBox.getValue().toString());
@@ -112,6 +122,27 @@ public class FXMLDocumentController implements Initializable {
             radioButtonLabel.setText("The item selected is C++");
         
     }
+    
+    /**
+     *  Method to copy Strings from ListView and populate textArea
+     */
+    
+    public void listViewButtonPushed(){
+        
+        String textAreaString = "";
+        
+        ObservableList listOfItems = listView.getSelectionModel().getSelectedItems();
+        
+        for (Object item : listOfItems){
+            textAreaString += String.format("%s%n", (String) item);
+        } 
+        
+        this.golfTextArea.setText(textAreaString);
+            
+    }
+      /**
+     * Initializes the controller class.
+     */
     
     
       @Override
@@ -138,6 +169,11 @@ public class FXMLDocumentController implements Initializable {
         this.javaRadioButton.setToggleGroup(favLangToggleGroup);
         this.cSharpRadioButton.setToggleGroup(favLangToggleGroup);
         this.cPlusPlusRadioButton.setToggleGroup(favLangToggleGroup);
+        
+        
+        //COnfigure ListView
+        listView.getItems().addAll("Golf Balls","Wedges","Irons","Drivers","Putter");
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
         
     } 
