@@ -43,6 +43,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#newPersonButtonPushed" text="Add New Person" />
                   <Button mnemonicParsing="false" onAction="#deleteButtonPushed" text="Delete Person(s)" />
+                  <Button mnemonicParsing="false" onAction="#changeSceneToDetailedPersonView" text="Detailed Person View" />
                </children>
             </HBox>
          </children>

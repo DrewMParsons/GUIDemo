@@ -2,6 +2,7 @@
 package guidemo;
 
 import java.time.LocalDate;
+import java.time.Period;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -56,6 +57,10 @@ public class Person {
         this.birthday = birthday;
     }
     
-    
+    public int getAge(){
+        
+        //returns the amount of years between birthday and current date
+        return Period.between(birthday, LocalDate.now()).getYears();
+    }
     
 }

@@ -89,6 +89,32 @@ public class TableViewExampleController implements Initializable {
         window.setScene(tableViewScene);
         window.show();
     }
+    
+    /**
+     * 
+     * When called, will pass the selected Person Object to the detailed view 
+     */
+     public void changeSceneToDetailedPersonView(ActionEvent event) throws IOException{
+         
+         
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation((getClass().getResource("PersonView.fxml")));
+        Parent tableViewParent = loader.load();
+        
+        
+        Scene tableViewScene = new Scene(tableViewParent); 
+        
+        //access controller and call a method
+        PersonViewController controller = loader.getController();
+        
+        //returns the person object that is currently selected
+        controller.initData(tableView.getSelectionModel().getSelectedItem());
+        
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
 
     /**
      * Initializes the controller class.
