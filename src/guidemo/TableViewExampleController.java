@@ -19,9 +19,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 
 /**
@@ -38,6 +43,35 @@ public class TableViewExampleController implements Initializable {
     @FXML private TableColumn<Person, String> lastNameColumn;
     @FXML private TableColumn<Person, LocalDate> birthdayColumn;
     
+    //used to create new person objects
+    @FXML private TextField firstNameTextField;    
+    @FXML private TextField lastNameTextField;
+    @FXML private DatePicker birthdayDatePicker;
+    
+    /**
+     * 
+     * Method allows user to double click on the cell and update the firstname
+     */
+    
+    public void changeFirstNameCellEvent(CellEditEvent edittedCell){
+        
+        Person personSelected = tableView.getSelectionModel().getSelectedItem();
+        personSelected.setFirstName(edittedCell.getNewValue().toString());
+        
+    }
+    
+    /**
+     * 
+     * Method allows user to double click on the cell and update the Lastname
+     */
+    
+    public void changeLastNameCellEvent(CellEditEvent edittedCell){
+        
+        Person personSelected = tableView.getSelectionModel().getSelectedItem();
+        personSelected.setLastName(edittedCell.getNewValue().toString());
+      
+    
+    }
     
     public void changeScreenButtonPushed(ActionEvent event) throws IOException{
         
@@ -69,6 +103,14 @@ public class TableViewExampleController implements Initializable {
         //load dummt data
         tableView.setItems(getPeople());
         
+        //Update the table to allow for first and last name fields to be editable
+        tableView.setEditable(true);
+        
+        
+        
+        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        
     }    
     
     /**
@@ -84,4 +126,22 @@ public class TableViewExampleController implements Initializable {
        
         return people;
     }
-}
+    
+    /**
+     *  add new person to table
+     */
+    
+    public void newPersonButtonPushed(){
+        
+        Person newPerson = new Person(firstNameTextField.getText(),
+                                      lastNameTextField.getText(),
+                                      birthdayDatePicker.getValue());
+        
+        //ask table to give us the entire list
+        //add new person to the list
+        tableView.getItems().add(newPerson);
+        
+        
+    }
+}  
+

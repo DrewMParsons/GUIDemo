@@ -33,11 +33,9 @@ public class Person {
         return firstName.get();
     }
 
-    public void setFirstName(SimpleStringProperty firstName) {
-        this.firstName = firstName;
-    }
+   
     public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
+        this.firstName = new SimpleStringProperty(firstName);
     }
 
     public String getLastName() {
@@ -45,12 +43,10 @@ public class Person {
     }
     
 
-    public void setLastName(SimpleStringProperty lastName) {
-        this.lastName = lastName;
-    }
+   
     
     public void setLastName(String lastName) {
-        this.firstName.set(lastName);
+        this.lastName= new SimpleStringProperty(lastName);
     }
     public LocalDate getBirthday() {
         return birthday;
