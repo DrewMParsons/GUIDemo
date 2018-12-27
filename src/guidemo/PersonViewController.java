@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +29,8 @@ public class PersonViewController implements Initializable {
     @FXML private Label lastNameLabel;
     @FXML private Label birthdayLabel;
     @FXML private Label ageLabel;
+    @FXML private ImageView photo;
+    
     
     /**
      * 
@@ -41,7 +44,7 @@ public class PersonViewController implements Initializable {
         lastNameLabel.setText(selectedPerson.getLastName());
         birthdayLabel.setText(selectedPerson.getBirthday().toString());
         ageLabel.setText(Integer.toString(selectedPerson.getAge()));
-                
+        photo.setImage(selectedPerson.getPhoto());
         
         
     }
@@ -50,13 +53,6 @@ public class PersonViewController implements Initializable {
         
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("TableViewExample.fxml"));
         Scene tableViewScene = new Scene(tableViewParent); 
-        
-        //This line gets the Stage information
-        //In Start, the stage is passed through as a param.  here we need to get it
-        //the action event(event) doesnt know what type of object is returned, so we tell it the return is of type node
-        //BCS its a Node, we cam then get the scene and window, 
-        //Then cast that as a Stage, and assign to our Stage(window)
-        
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();

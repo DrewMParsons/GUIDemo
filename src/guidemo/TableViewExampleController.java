@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -28,6 +29,7 @@ import javafx.scene.control.TextField;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -49,11 +51,26 @@ public class TableViewExampleController implements Initializable {
     @FXML private TextField lastNameTextField;
     @FXML private DatePicker birthdayDatePicker;
     
+    @FXML private Button detailedPersonViewButton;
+    
+    
+    
+    /**
+     * 
+     * This method will enable the detailed view button once a row in table is 
+     * selected
+     * Set this method in the tableview "on mouse clicked" code in SceneBuilder
+     */
+    
+    public void userClickedOnTable(){
+        this.detailedPersonViewButton.setDisable(false);
+        
+    }
+    
     /**
      * 
      * Method allows user to double click on the cell and update the firstname
      */
-    
     public void changeFirstNameCellEvent(CellEditEvent edittedCell){
         
         Person personSelected = tableView.getSelectionModel().getSelectedItem();
@@ -140,6 +157,9 @@ public class TableViewExampleController implements Initializable {
         
         //Allows user to select multiple rows at a time
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
+        //Disable the detailed person view button until a row is selected
+        this.detailedPersonViewButton.setDisable(true);
     }   
     
     /**
@@ -168,9 +188,9 @@ public class TableViewExampleController implements Initializable {
     public ObservableList<Person> getPeople(){
         
         ObservableList<Person> people = FXCollections.observableArrayList();
-        people.add(new Person("Frank", "Sinatra", LocalDate.of(1915, Month.DECEMBER, 12)));
+        people.add(new Person("Frank", "Sinatra", LocalDate.of(1915, Month.DECEMBER, 12),new Image("/images/FrankSinatra.jpg")));
         people.add(new Person("Reb", "Finatra", LocalDate.of(1986, Month.JULY, 21)));
-        people.add(new Person("Mr", "T", LocalDate.of(1915, Month.MAY, 12)));
+        people.add(new Person("Mr", "T", LocalDate.of(1915, Month.MAY, 12),new Image("/images/MrT.jpg")));
        
         return people;
     }

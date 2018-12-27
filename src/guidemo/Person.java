@@ -4,6 +4,7 @@ package guidemo;
 import java.time.LocalDate;
 import java.time.Period;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -14,6 +15,7 @@ public class Person {
     
     private SimpleStringProperty firstName, lastName;
     private LocalDate birthday;
+    private Image photo;
 
     
     
@@ -24,13 +26,22 @@ public class Person {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.birthday = birthday;
+        photo = new Image("/images/default.png");
     }
 
     
+    //Constructor with photo
+    
+    
+    public Person(String firstName, String lastName, LocalDate birthday, Image photo){
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.birthday = birthday;
+        this.photo = photo;
+    }
+
     //Getters and Setters
-    
-    
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName.get();
     }
 
@@ -61,6 +72,14 @@ public class Person {
         
         //returns the amount of years between birthday and current date
         return Period.between(birthday, LocalDate.now()).getYears();
+    }
+
+    public Image getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Image photo) {
+        this.photo = photo;
     }
     
 }
