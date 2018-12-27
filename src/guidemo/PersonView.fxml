@@ -41,9 +41,10 @@
                   <Label fx:id="ageLabel" prefHeight="40.0" prefWidth="200.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
+            <ImageView fx:id="photo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Button mnemonicParsing="false" onAction="#chooseImageButtonPushed" text="Change Image" />
          </children>
       </VBox>
-      <ImageView fx:id="photo" fitHeight="150.0" fitWidth="200.0" layoutX="134.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="723.0" layoutY="561.0" mnemonicParsing="false" onAction="#changeScreenButtonPushed" text="Back" />
    </children>
 </AnchorPane>

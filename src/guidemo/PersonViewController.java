@@ -1,9 +1,12 @@
 
 package guidemo;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +15,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -31,6 +37,48 @@ public class PersonViewController implements Initializable {
     @FXML private Label ageLabel;
     @FXML private ImageView photo;
     
+    private FileChooser fileChooser;
+    private File filePath;
+    
+    
+    /**
+     * 
+     * This method will allow user to change the image on the screen 
+     * @param event 
+     */
+    
+    
+    public void chooseImageButtonPushed(ActionEvent event){
+        
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Imaage");
+        
+        //set to user's directory or go to the defalult C drive if cannot access
+        String userDirectoryString = System.getProperty("user.home");
+        File userDirectory= new File(userDirectoryString);
+        
+        if(!userDirectory.canRead())
+            userDirectory = new File("c:/");
+        
+        fileChooser.setInitialDirectory(userDirectory);
+        
+        this.filePath = fileChooser.showOpenDialog(stage);
+        
+        //Try to update image by loading new image
+        try{
+            BufferedImage bufferedImage = ImageIO.read(filePath);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            selectedPerson.setPhoto(image);
+            photo.setImage(selectedPerson.getPhoto()); 
+            
+            
+        } catch(IOException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        
+    }
     
     /**
      * 
