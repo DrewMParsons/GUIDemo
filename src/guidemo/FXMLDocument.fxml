@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guidemo.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../stylesheets/graystyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guidemo.FXMLDocumentController">
    <children>
       <HBox layoutX="8.0" layoutY="300.0" prefHeight="300.0" prefWidth="800.0" spacing="20.0">
          <children>
@@ -66,7 +66,7 @@
                   <CheckBox fx:id="pepperoniCheckBox" mnemonicParsing="false" text="Peppperoni" />
                   <CheckBox fx:id="pineappleCheckBox" mnemonicParsing="false" text="Pineapple" />
                   <CheckBox fx:id="baconCheckBox" mnemonicParsing="false" text="Bacon" />
-                  <Button mnemonicParsing="false" onAction="#pizzaOrderButtonPushed" text="Order Pizza " />
+                  <Button mnemonicParsing="false" onAction="#pizzaOrderButtonPushed" styleClass="root" text="Order Pizza " />
                   <Label fx:id="pizzaOrderLabel" alignment="TOP_LEFT" prefHeight="105.0" prefWidth="148.0" text="label" />
                </children>
             </VBox>
